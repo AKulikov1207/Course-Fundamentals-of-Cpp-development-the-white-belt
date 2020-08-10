@@ -85,6 +85,7 @@ int main() {
 }
 ```
 ### Вывод
+```
 Incognito
 Polina with unknown last name
 Polina Sergeeva
@@ -97,6 +98,7 @@ Pauline (Polina) with unknown last name
 Sergeeva with unknown first name
 Pauline (Polina) Sergeeva
 Pauline (Polina) Sergeeva (Ivanova, Sergeeva)
+```
 
 Дополните класс Person из задачи «Имена и фамилии — 2» конструктором, позволяющим задать имя и фамилию человека при рождении, а также сам год рождения. Класс не должен иметь конструктора по умолчанию.
 
@@ -123,7 +125,9 @@ int main() {
 }
 ```
 ### Вывод
+```
 No person
 Polina Sergeeva
 Appolinaria (Polina) Sergeeva
 Appolinaria (Polina) Ivanova (Sergeeva)
+```

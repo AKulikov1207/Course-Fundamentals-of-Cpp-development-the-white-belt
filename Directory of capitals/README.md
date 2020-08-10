@@ -33,6 +33,7 @@
 
 ## Пример
 ### Ввод
+```
 6
 CHANGE_CAPITAL RussianEmpire Petrograd
 RENAME RussianEmpire RussianRepublic
@@ -40,15 +41,17 @@ ABOUT RussianRepublic
 RENAME RussianRepublic USSR
 CHANGE_CAPITAL USSR Moscow
 DUMP
+```
 
 ### Вывод
+```
 Introduce new country RussianEmpire with capital Petrograd
 Country RussianEmpire with capital Petrograd has been renamed to RussianRepublic
 Country RussianRepublic has capital Petrograd
 Country RussianRepublic with capital Petrograd has been renamed to USSR
 Country USSR has changed its capital from Petrograd to Moscow
 USSR/Moscow
-
+```
 
 
 

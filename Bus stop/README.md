@@ -20,6 +20,7 @@
 
 ## Пример
 ### Ввод
+```
 10
 ALL_BUSES
 BUSES_FOR_STOP Marushkino
@@ -31,8 +32,10 @@ NEW_BUS 950 6 Kokoshkino Marushkino Vnukovo Peredelkino Solntsevo Troparyovo
 NEW_BUS 272 4 Vnukovo Moskovsky Rumyantsevo Troparyovo
 STOPS_FOR_BUS 272
 ALL_BUSES
+```
 
 ### Вывод
+```
 No buses
 No stop
 No bus
@@ -45,3 +48,4 @@ Bus 272: Vnukovo Moskovsky Rumyantsevo Troparyovo
 Bus 32: Tolstopaltsevo Marushkino Vnukovo
 Bus 32K: Tolstopaltsevo Marushkino Vnukovo Peredelkino Solntsevo Skolkovo
 Bus 950: Kokoshkino Marushkino Vnukovo Peredelkino Solntsevo Troparyovo
+```
