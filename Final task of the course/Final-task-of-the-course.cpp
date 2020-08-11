@@ -9,9 +9,12 @@
 
 using namespace std;
 
+// класс для представления даты
 class Date {
 	public:
 		Date() {}
+
+                // конструктор выбрасывает исключение, если его аргументы некорректны
 		Date(int y, int m, int d) : year{ y }, month{ m }, day{ d } {
 			if (!(m >= 1 && m <= 12))
 				throw logic_error("Month value is invalid: " + to_string(m));
@@ -29,6 +32,7 @@ class Date {
 		int day;
 };
 
+// определить сравнение для дат необходимо для использования их в качестве ключей словаря
 bool operator<(const Date& lhs, const Date& rhs) {
 	if (lhs.GetYear() != rhs.GetYear()) 
 		return lhs.GetYear() < rhs.GetYear();
@@ -38,6 +42,7 @@ bool operator<(const Date& lhs, const Date& rhs) {
 		return lhs.GetDay() < rhs.GetDay();
 };
 
+// парсинг даты
 Date Parse(string& date) {
 	istringstream date_is(date);
 	bool check = true;
@@ -61,6 +66,7 @@ Date Parse(string& date) {
 	return Date(year, month, day);
 }
 
+// даты будут по умолчанию выводиться в нужном формате
 ostream& operator<<(ostream& os, const Date& d) {
 	os << setfill('0') << setw(4) << to_string(d.GetYear()) << "-";
 	os << setfill('0') << setw(2) << to_string(d.GetMonth()) << "-";
@@ -68,16 +74,20 @@ ostream& operator<<(ostream& os, const Date& d) {
 	return os;
 }
 
+// реализация БД для хранения данных в виде <Дата, События>
+// нам требуется быстрый поиск событий по дате, а также быстрое удаление конкретного события, используем словарь множеств — map<Date, set<string>>, для каждой даты хранящий множество соответствующих событий.
 class Database {
 	public:
 		Database() {}
 		Database(map<Date, set<string>> db) : data_base{ db } {}
-
+		
+		// добавление события в БД
 		void AddEvent(const Date& date, const string& event) {
 			if (!event.empty())
 				data_base[date].insert(event);
 		}
-
+		
+		// удаление указанного события 
 		bool DeleteEvent(const Date& date, const string& event) {
 			if (data_base.count(date) > 0 && data_base.at(date).count(event) > 0)
 			{
@@ -86,7 +96,9 @@ class Database {
 			}
 			return false;
 		}
-
+		
+		// удаление из базы указанной даты и всех событий в ней, 
+		// возврат количества удаленных событий
 		size_t DeleteDate(const Date& date) {
 			size_t count = 0;
 			if (data_base.count(date) > 0)
@@ -96,7 +108,8 @@ class Database {
 			}
 			return count;
 		}
-
+		
+		// поиск всех событий в указанную дату
 		set<string> Find(const Date& date) const {
 			set<string> res;
 			if (data_base.count(date) > 0) {
@@ -104,7 +117,8 @@ class Database {
 			}
 			return res;
 		}
-  
+  		
+		// печать всех данных базы в нужном формате "Дата Событие"
 		void Print() const {
 			for (const auto& p : data_base) {
 				for (auto& d : p.second) {
