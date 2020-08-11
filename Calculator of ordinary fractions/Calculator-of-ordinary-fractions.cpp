@@ -8,6 +8,7 @@
 
 using namespace std;
 
+// представление рациональных чисел
 class Rational {
 public:
 	Rational() {
@@ -18,23 +19,23 @@ public:
 	Rational(int numerator, int denominator) {
 		if (denominator < 0) {
 			if (numerator < 0) {
-				denominator = abs(denominator);
+				denominator = abs(denominator);          // если дробь вида -p/-q, делаем её вида p/q
 				numerator = abs(numerator);
 			}
 			else {
-				denominator = abs(denominator);
+				denominator = abs(denominator);          // если дробь вида p/-q, делаем её вида -p/q
 				numerator = numerator - 2 * numerator;
 			}
 		}
 
 		if (numerator == 0)
-			denominator = 1;
+			denominator = 1;                                 // если числитель = 0, то знаменатель = 1 (по условию задачи)
 
-		int Gcd = nod(abs(numerator), abs(denominator));
+		int Gcd = nod(abs(numerator), abs(denominator));         // НОД(числитель, знаменатель)
 
 		p = numerator / Gcd;
 		q = denominator / Gcd;
-		if (q == 0) throw  invalid_argument("denominator = 0");
+		if (q == 0) throw  invalid_argument("denominator = 0");  // выброс исключения "знаменатель = 0"
 	}
 
 	int Numerator() const {
@@ -46,9 +47,10 @@ public:
 	}
 
 private:
-	int p;
-	int q;
-
+	int p;    // числитель
+	int q;    // знаменатель (p/q)
+	
+	// наибольший общий делитель
 	int nod(int x, int y) {
 		while (x > 0 && y > 0) {
 			if (x > y)
@@ -61,6 +63,7 @@ private:
 	}
 };
 
+// перегрузка логических операторов
 bool operator==(const Rational& lhs, const Rational& rhs) {
 	return ((lhs.Numerator() == rhs.Numerator()) && (lhs.Denominator() == rhs.Denominator()));
 }
@@ -73,6 +76,7 @@ bool operator>(const Rational& lhs, const Rational& rhs) {
 	return rhs < lhs;
 }
 
+// перегрузка арифметических операторов
 Rational operator+(const Rational& lhs, const Rational& rhs) {
 	int p = (lhs.Numerator() * rhs.Denominator()) + (rhs.Numerator() * lhs.Denominator());
 	int q = lhs.Denominator() * rhs.Denominator();
@@ -98,6 +102,7 @@ Rational operator/(const Rational& lhs, const Rational& rhs) {
 	return Rational(p, q);
 }
 
+// вывод рационального числа в нужном формате
 ostream& operator<<(ostream& os, const Rational& rat) {
 	os << rat.Numerator() << "/" << rat.Denominator();
 	return os;
@@ -116,7 +121,7 @@ int main()
 	try
 	{
 		Rational a, b;
-		char op;
+		char op;                 // арифметичсекий оператор
 
 		cin >> a >> op >> b;
 
